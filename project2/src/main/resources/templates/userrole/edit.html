@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit</title>
+</head>
+<body>
+
+	<form th:object="${userRole}" action="/userrole/edit" method="post">
+		
+		
+		<label for="role"> Role:</label><br>
+		<input th:field="*{role}" name="role"><br>
+		<p th:errors="*{role}" />
+		
+
+		<button type="submit"> Save </button>
+
+	</form>
+
+</body>
+</html>

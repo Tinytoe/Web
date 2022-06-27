@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search</title>
+</head>
+<body>
+
+	<div th:each="score : ${scoreList}">
+		<p th:text=" 'Score Id: ' +  ${score.id}">
+		<p th:text=" 'Score: ' +  ${score.name}">
+		<p th:text=" 'Student Id: ' +  ${score.student.studentId}">
+		<p th:text=" 'Course: ' +  ${score.course.id}">
+		
+		<div>
+			<a th:href="@{'/score/edit?id=' + ${score.id}}"> Edit</a>
+			<a th:href="@{'/score/delete?id=' + ${score.id}} "> Delete</a>
+		</div>
+	
+	</div>
+</body>
+</html>

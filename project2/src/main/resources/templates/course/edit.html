@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit</title>
+</head>
+<body>
+
+	<form th:object="${course}" action="/course/edit" method="post">
+		
+		
+		<label for="name"> Course:</label><br>
+		<input th:field="*{name}" name="name"><br>
+		<p th:errors="*{name}" />
+		
+
+		<button type="submit"> Save </button>
+
+	</form>
+
+</body>
+</html>

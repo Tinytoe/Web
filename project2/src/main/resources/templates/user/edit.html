@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit</title>
+</head>
+<body>
+
+	<form th:object="${user}" action="/user/edit" method="post">
+		
+		<label for="username"> Username:</label><br>
+		<input readonly th:field="*{username}" name="username"> <br>
+		
+		<label for="password"> Password:</label><br>
+		<input th:field="*{password}" name="password"><br>
+		<p th:errors="*{password}" />
+		
+		<label for="bDate"> Date of birth:</label><br>
+		<input th:field="*{birthdate}" name="birthdate"><br>
+		<p th:errors="*{birthdate}" />
+		
+		<label for="userRole.role"> Role:</label><br>
+		<input th:field="*{userRole.role}" name="userRole.role"><br>
+		<p th:errors="*{userRole.role}" />	
+			
+		<button type="submit">Save</button>
+
+	</form>
+
+</body>
+</html>

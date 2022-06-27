@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search</title>
+</head>
+<body>
+	<div th:each="userRole : ${userRoleList}">
+		<p th:text=" 'User_id: ' +  ${userRole.userId}">
+		<p th:text=" 'Role: ' +  ${userRole.role}">
+		<div>
+			<a th:href="@{'/userrole/edit?userId=' + ${userRole.userId}}"> Edit</a>
+			<a th:href="@{'/userrole/delete?userId=' + ${userRole.userId}} "> Delete</a>
+		</div>
+	
+	</div>
+</body>
+</html>

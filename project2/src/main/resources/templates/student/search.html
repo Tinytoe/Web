@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search</title>
+</head>
+<body>
+
+	<div th:each="student  : ${studentList}">
+		<p th:text=" 'Student Id: ' +  ${student.studentId}">
+		<p th:text=" 'Student Code: ' +  ${student.studentCode}">
+		<div>
+			<a th:href="@{'/student/edit?studentId=' + ${student.studentId}}"> Edit</a>
+			<a th:href="@{'/student/delete?studentId=' + ${student.studentId}} "> Delete</a>
+		</div>
+	
+	</div>
+</body>
+</html>

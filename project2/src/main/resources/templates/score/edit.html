@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit</title>
+</head>
+<body>
+
+	<form th:object="${score}" action="/score/edit" method="post">
+		
+		
+		<label for="id"> Id Score:</label><br>
+		<input readonly th:field="*id}" name="id"><br>
+		
+		<label for="score"> Score:</label><br>
+		<input th:field="*{score}" name="score"><br>
+		<p th:errors="*{score}" />
+		
+		<label for="student.studentId"> Student Id:</label><br>
+		<input th:field="*{student.studentId}" name="student.studentId"><br>
+		<p th:errors="*{student.studentId}" />
+		
+		<label for="course.id"> Course:</label><br>
+		<input th:field="*{course.id}" name="course.id"><br>
+		<p th:errors="*{course.id}" />
+		
+
+		<button type="submit"> Save </button>
+
+	</form>
+
+</body>
+</html>

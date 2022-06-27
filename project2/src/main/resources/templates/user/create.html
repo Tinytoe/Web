@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Create User</title>
+</head>
+<body>
+	<form action="/user/create" method="post" enctype="multipart/form-data">
+		
+		<label for="username"> Username:</label><br>
+		<input placeholder="Username" name="username"><br>
+		<label for="password"> Password:</label><br>
+		<input placeholder="Password" name="password"><br>
+		<label for="bDate"> Date of birth:</label><br>
+		<input placeholder="dd/MM/yyyy" name="bDate"><br>
+		
+		<label for="userRole.userId"> Select Role:</label><br>
+		<select name="userRole.userId">
+			<option value="" >-----Chon----</option>
+			
+			<option th:each="userRole : ${userRoleList}"
+				th:value="${userRole.userId}" th:text="${userRole.role}"></option>
+		</select>
+		
+		<input	type="file" name = "file"><br>
+		
+		<button type="submit"> SAVE </button>
+		
+		
+	
+	
+	
+	
+	</form>
+</body>
+</html>

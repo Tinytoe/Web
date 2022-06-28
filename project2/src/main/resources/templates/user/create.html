@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="/template.html">
 <head>
 <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>Create User</title>
 </head>
-<body>
+<body layout:fragment="body">
+	<!--  
 	<form action="/user/create" method="post" enctype="multipart/form-data">
 		
 		<label for="username"> Username:</label><br>
@@ -24,13 +29,48 @@
 		
 		<input	type="file" name = "file"><br>
 		
-		<button type="submit"> SAVE </button>
+		<button type="submit" th:text="#{button.save}"> </button>
 		
-		
-	
-	
-	
-	
+		-->
+<div class="row">
+	<div class="container mt-3">
+		<h2>CREATE USER</h2>
+		<form th:action="@{/user/create}" method="post" enctype="multipart/form-data">
+			<div class="mb-3 mt-3">
+				<label for="username">Username:</label> 
+				<input class="form-control" placeholder="Enter Username" name="username">
+			</div>
+			<div class="mb-3">
+				<label for="password">Password:</label> 
+				<input  type="password" class="form-control" placeholder="Enter password" name="password">
+			</div>
+			<div class="mb-3">
+				<label for="bDate">Date of birth:</label> 
+				<input type="date" name="bDate">
+			</div>
+			<div>
+				<label for="userRole.userId"> Select Role:</label><br> 
+				<select name="userRole.userId">
+					<option value="">-----Chon----</option>
+
+					<option th:each="userRole : ${userRoleList}"
+						th:value="${userRole.userId}" th:text="${userRole.role}"></option>
+				</select><br>
+				<label for="student.studentId"> Select StudentId:</label><br> 
+				<select name="student.studentId">
+					<option value="">-----Chon----</option>
+
+					<option th:each="student : ${studentList}"
+						th:value="${student.studentId}"></option>
+				</select><br>
+				<input	type="file" name = "file"><br>
+				
+			</div>
+			<button type="submit" class="btn btn-primary" th:text="#{button.save}"></button>
+		</form>
+	</div>
 	</form>
+	
+</div>
 </body>
 </html>

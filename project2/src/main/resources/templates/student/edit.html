@@ -8,6 +8,8 @@
 
 	<form th:object="${student}" action="/student/edit" method="post">
 		
+		<label for="studentId"> Student Id:</label><br>
+		<input th:field="*{studentId}" name="studentId"><br>
 		
 		<label for="studentCode"> Student Code:</label><br>
 		<input th:field="*{studentCode}" name="studentCode"><br>

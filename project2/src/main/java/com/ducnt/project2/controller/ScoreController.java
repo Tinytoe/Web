@@ -28,9 +28,11 @@ public class ScoreController {
 	StudentRepo studentRepo;
 
 	@GetMapping("/score/create")
-	public String create() {
-		return "score/create.html";
+	public String create(Model model) {
 		
+		model.addAttribute("studentList", studentRepo.findAll());
+		model.addAttribute("coursetList", courseRepo.findAll());
+		return "score/create.html";
 		
 	}
 

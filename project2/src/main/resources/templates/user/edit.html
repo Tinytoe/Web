@@ -15,13 +15,25 @@
 		<input th:field="*{password}" name="password"><br>
 		<p th:errors="*{password}" />
 		
-		<label for="bDate"> Date of birth:</label><br>
-		<input th:field="*{birthdate}" name="birthdate"><br>
+		<label for="bDate">Date of birth:</label> 
+		<input type="date" name="bDate">
 		<p th:errors="*{birthdate}" />
 		
-		<label for="userRole.role"> Role:</label><br>
-		<input th:field="*{userRole.role}" name="userRole.role"><br>
-		<p th:errors="*{userRole.role}" />	
+		<div>
+				<label for="userRole.userId"> Select Role:</label><br> 
+				<select name="userRole.userId">
+					<option value="">-----Chon----</option>
+
+					<option th:each="userRole : ${userRoleList}"
+						th:value="${userRole.userId}" th:text="${userRole.role}"></option>
+				</select><br>
+				<label for="student.studentId"> Select StudentId:</label><br> 
+				<select name="student.studentId">
+					<option value="">-----Chon----</option>
+
+					<option th:each="student : ${studentList}"
+						th:value="${student.studentId}" th:text="${student.studentCode}"></option>
+				</select><br>
 			
 		<button type="submit">Save</button>
 

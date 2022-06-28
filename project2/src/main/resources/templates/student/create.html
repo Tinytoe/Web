@@ -7,11 +7,10 @@
 <body>
 	<form action="/student/create" method="post">
 
-		
 		<label for="studentCode"> Student Code:</label><br> 
 		<input placeholder="Student Code" name="studentCode"><br>
 
-		<button type="submit">SAVE</button>
+		<button type="submit" th:text="#{button.save}"></button>
 
 	</form>
 </body>

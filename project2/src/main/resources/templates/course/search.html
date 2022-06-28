@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="/template.html">
 <head>
 <meta charset="UTF-8">
 <title>Search</title>
 </head>
-<body>
-
-	<div th:each="course : ${courseList}">
+<body layout:fragment="body">
+<a th:href="@{/course/create}" > Create Course </a>
+<div class="row">
+	<div th:each="course : ${courseList}" class="col-4 card">
 		<p th:text=" 'Course Id: ' +  ${course.id}">
 		<p th:text=" 'Course Name: ' +  ${course.name}">
 		<div>
@@ -15,5 +16,6 @@
 		</div>
 	
 	</div>
+</div>
 </body>
 </html>

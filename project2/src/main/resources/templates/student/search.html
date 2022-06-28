@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="/template.html">
 <head>
 <meta charset="UTF-8">
 <title>Search</title>
 </head>
-<body>
-
-	<div th:each="student  : ${studentList}">
+<body layout:fragment="body">
+<div class="row">
+<a th:href="@{/student/create}" > Create Student </a>
+	<div th:each="student  : ${studentList}" class="col-4 card">
 		<p th:text=" 'Student Id: ' +  ${student.studentId}">
 		<p th:text=" 'Student Code: ' +  ${student.studentCode}">
 		<div>
 			<a th:href="@{'/student/edit?studentId=' + ${student.studentId}}"> Edit</a>
 			<a th:href="@{'/student/delete?studentId=' + ${student.studentId}} "> Delete</a>
 		</div>
+	
+	</div>
 	
 	</div>
 </body>

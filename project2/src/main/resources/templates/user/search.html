@@ -1,23 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="/template.html">
 <head>
 <meta charset="UTF-8">
-<title>Search</title>
+
+
 </head>
-<body>
-	<div th:each="user : ${userList}">
-		<p th:text=" 'ID: ' +  ${user.id}">
-		<p th:text=" 'User name: ' +  ${user.username}">
-		<p th:text=" 'Password: ' +  ${user.password}">
-		<p th:text=" 'DOB: ' +  ${user.birthdate}">
-		<p th:text=" 'Role: ' +  ${user.userRole.role}">
-		<img  th:src=" ${user.avatar} " width="400">
+<body layout:fragment="body">
+	<a th:href="@{/user/create}"> Create User </a>
+	<div class="row">
+		<div th:each="user : ${userList}" class="col-4 card">
+			<div class="card-body">
+		  	<p th:text=" 'ID: ' +  ${user.id}"></p>
+			<p th:text=" 'User name: ' +  ${user.username}"></p>
+			<p th:text=" 'Password: ' +  ${user.password}"></p>
+			<p th:text=" 'DOB: ' +  ${user.birthdate}"></p>
+			<p th:text=" 'Role: ' +  ${user.userRole.role}"></p>
+			<p th:text=" 'Student Id: ' +  ${user.student.studentId}"></p>
+			<p><img th:src="@{'/download-file?image=' + ${user.avatar}}" width="250"/></p>
+			
+			<div>
+				<a th:href="@{'/user/edit?id=' + ${user.id}}"> Edit</a>
+				<a th:href="@{'/user/delete?id=' + ${user.id}} "> Delete</a>
+			</div>
+		<!--<div class="container mt-3">
 		
-		<div>
-			<a th:href="@{'/user/edit?id=' + ${user.id}}"> Edit</a>
-			<a th:href="@{'/user/delete?id=' + ${user.id}} "> Delete</a>
+			 <h2>User</h2>
+			<p th:text=" 'ID: ' +  ${user.id}"></p>
+			<div class="card" style="width: 400px">
+				<p><img class="card-img-top" src="@{'/download-file?image=' + ${user.avatar}}" 
+								alt="Avatar" style="width: 50%"/></p>
+				<div class="card-body">
+					<h4 class="card-title"> Alo </h4>
+					<div class="card-text">
+						<p th:text=" 'User name: ' +  ${user.username}"></p>
+						<p th:text=" 'Password: ' +  ${user.password}"></p>
+						<p th:text=" 'DOB: ' +  ${user.birthdate}"></p>
+						<p th:text=" 'Role: ' +  ${user.userRole.role}"></p>
+					</div>
+					<a th:href="@{'/user/edit?id=' + ${user.id}}"
+						class="btn btn-primary"> Edit</a> <a
+						th:href="@{'/user/delete?id=' + ${user.id}} "
+						class="btn btn-primary"> Delete</a>
+				</div>
+			</div>
+
+-->
+
+			
 		</div>
-	
-	</div>
+		</div>
 </body>
 </html>

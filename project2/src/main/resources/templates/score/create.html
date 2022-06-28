@@ -6,18 +6,28 @@
 </head>
 <body>
 	<form action="/score/create" method="post">
-
-		<label for="student.studentId"> Student ID:</label><br> 
-		<input placeholder="Student ID" name="student.studentId"><br>
-		
-		<label for="course.id"> Course Id:</label><br> 
-		<input placeholder="Course Id" name="course.id"><br>
-		
+		<div>
+			<label for="student.studentId"> Select StudentId:</label><br> 
+			<select name="student.studentId">
+					<option value="">-----Chon----</option>
+	
+					<option th:each="student : ${studentList}" th:value="${student.studentId}"></option>
+			</select><br>
+		</div>
+		<div>
+			<label for="course.id"> Select Course:</label><br> 
+				<select name="course.id">
+					<option value="">-----Chon----</option>
+	
+					<option th:each="course : ${courseList}" th:value="${course.id}"></option>
+				</select><br>
+		</div>
+		<div>
 		<label for="score"> Score:</label><br> 
-		<input placeholder="Score" name="score"><br>
-		
+			<input placeholder="Score" name="score" class="form-control"><br>
+		</div>
 
-		<button type="submit">SAVE</button>
+		<button type="submit" th:text="#{button.save}">SAVE</button>
 	</form>
 </body>
 </html>

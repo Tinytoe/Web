@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html layout:decorate="template.html">
+<head>
+<meta charset="UTF-8">
+<title>Edit</title>
+</head>
+<body layout:fragment="body">
+	<form  action="/bill/edit" method="post">
+		<label for="id">ID: </label>
+		<input name="id" readonly="readonly" th:value="${bill.id}"/><br>
+		<label>Buy Date: </label>
+		<input readonly="readonly" name="buyDate" th:value="${bill.buyDate}"/><br>
+		
+		<div>
+			<label> Select User id:</label> 
+			<select name="user.id">
+				<option value="">-----Select----</option>
+				<option th:each="user : ${userList}" th:value="${user.id}" th:text="${user.id}"></option>
+			</select><br>
+		</div>
+		<button type="submit" th:text="#{button.save}"> </button>
+	</form>
+</body>
+</html>

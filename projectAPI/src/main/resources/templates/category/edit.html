@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html layout:decorate="template.html">
+<head>
+<meta charset="UTF-8">
+<title>Edit</title>
+</head>
+<body layout:fragment="body">
+	<form  action="/category/edit" method="post">
+		<label for="id">ID: </label>
+		<input name="id" readonly="readonly" th:value="${category.id}"/><br>
+		<label for="name">Name: </label>
+		<input name="name" th:value="${category.name}"/><br>
+	
+		<button type="submit" th:text="#{button.save}"> </button>
+	</form>
+</body>
+</html>

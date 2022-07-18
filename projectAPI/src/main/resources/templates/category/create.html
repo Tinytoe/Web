@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html layout:decorate="template.html">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body layout:fragment="body">
+	<form action="/category/create" method="post">
+		<h2>CREATE CATEGORY</h2>
+		<label for="name">Category: </label><br>
+		<input type="text" name="name" ><br>
+		
+		<button type="submit" th:text="#{button.save}"></button>
+		
+	</form>
+</body>
+</html>

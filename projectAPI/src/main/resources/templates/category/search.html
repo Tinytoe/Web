@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html layout:decorate="template.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body layout:fragment="body">
+	
+	<form th:action="@{/category/search}" method="post">
+		
+		<input name="name" th:value="${name}" placeholder="tim kiem theo danh muc..." />
+
+		<button type="submit" th:text="#{button.search}">Search</button><br>
+		<select name="size">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+		</select> 
+		<input name="page" th:value="${page}" placeholder="Trang" />
+		<button type="submit">Search</button>
+		<p>Tong so: <span th:text="${totalPage}"></span></p>
+	</form>
+	
+	<a th:href="@{/category/create}" > Create </a>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>NAME</th>
+				<th>Other</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="cate : ${categoryList}">
+				<td th:text="${cate.id}"></td>
+				<td th:text="${cate.name}"></td>
+				<td>
+				<a class="btn btn-primary" th:href="@{'/category/edit?id=' + ${cate.id}}">
+						<span class="glyphicon glyphicon-pencil"></span>
+						EDIT </a>
+				<a class="btn btn-primary" th:href="@{'/category/delete?id=' + ${cate.id}}">
+						<span class="glyphicon glyphicon-remove"></span>
+						DELETE </a> 
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

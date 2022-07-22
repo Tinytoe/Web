@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html layout:decorate="/template.html">
+<head>
+<meta charset="UTF-8">
+<!--  -->	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body layout:fragment="body">
+	
+	<form th:action="@{/billItems/search}" method="post">
+		
+		<input name="name" th:value="${name}" placeholder="tim kiem ten..." />
+		<button type="submit" th:text="#{button.search}">Search</button><br>
+		<select name="size">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+		</select> 
+		<input name="page" th:value="${page}" placeholder="Trang" />
+		<button type="submit">Search</button>
+		<p>Tong so: <span th:text="${totalPage}"></span></p>
+	</form>
+	<a th:href="@{/billItems/create}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Create</a>
+	<div class="container mt-3">
+			<table class="table table-bordered table-striped" >
+				<thead>
+					<tr >
+						<th>Id</th>
+						<th>Product Name </th>
+						<th>Buy Price</th>
+						<th>Quantity</th>
+						<th>Bill Id</th>
+						<th>Other</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="billItems : ${billItemsList}" >
+					
+						<td th:text="${billItems.id}"></td>
+						<td th:text="${billItems.product.name}"></td>
+						<td th:text="${billItems.buyPrice}"></td>
+						<td th:text="${billItems.quantity}"></td>
+						<td th:text="${billItems.bill.id}"></td>
+						<td> 
+							<div style="word-wrap: break-word;">
+							<a class="btn btn-primary" th:href="@{'/billItems/edit?id=' + ${billItems.id}}">
+								<span class="glyphicon glyphicon-pencil"></span> Edit
+								</a>
+							<a class="btn btn-primary" th:href="@{'/billItems/delete?id=' + ${billItems.id}}">
+							 	<span class="glyphicon glyphicon-remove"></span> Delete
+							</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+</body>
+</html>

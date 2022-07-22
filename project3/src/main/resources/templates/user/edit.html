@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html layout:decorate="/template.html">
+<head>
+<meta charset="UTF-8">
+<title>Edit</title>
+</head>
+<body layout:fragment="body">
+
+	<form th:object="${user}" action="/user/edit" method="post">
+		
+			<div class="mb-3 mt-3">
+				<label for="id"> ID:</label><br>
+				<input class="form-control" readonly="readonly" th:field="*{id}" name="id">
+			</div>
+			
+			<div class="mb-3 mt-3">
+				<label for="name"> Name:</label><br>
+				<input class="form-control" th:value="${user.name}" name="name">
+				<p th:errors="*{name}" />
+			</div>
+			<div class="mb-3 mt-3">
+				<label for="username"> Username:</label><br>
+				<input class="form-control" readonly="readonly" th:field="*{username}" name="username">
+			</div>
+			
+			<div class="mb-3 mt-3">
+				<label for="password"> Password:</label><br>
+				<input type="text" class="form-control"  th:field="*{password}" name="password">
+			</div>
+			<div class="mb-3 mt-3">
+				<label for="email"> Email:</label><br>
+				<input readonly="readonly" class="form-control" type="email" th:value="${user.email}" name="email">
+			</div>
+			
+			<div class="mb-3 mt-3">
+				<label for="roles"> Role:</label><br>
+				<input type="checkbox" name="roles" th:value="ROLE_ADMIN"> ADMIN
+				<input type="checkbox" name="roles" th:value="ROLE_MEMBER"> MEMBER
+				<input type="checkbox" name="roles" th:value="ROLE_SELLER"> SELLER
+				<input type="checkbox" name="roles" th:value="ROLE_CUSTOMER"> CUSTOMER
+			</div>
+			<button type="submit" th:text="#{button.save}"></button>
+	</form>
+
+</body>
+</html>

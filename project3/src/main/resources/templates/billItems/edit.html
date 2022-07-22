@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html layout:decorate="/template.html">
+<head>
+<meta charset="UTF-8">
+<title>Edit</title>
+</head>
+<body layout:fragment="body">
+
+	<form th:object="${billItems}" action="/billItems/edit" method="post">
+		
+			<div class="mb-3 mt-3">
+				<label for="id"> ID:</label><br>
+				<input class="form-control" readonly="readonly" th:field="*{id}" name="id">
+			</div>
+			
+			<div class="mb-3 mt-3">
+				<label for="product.id"> Product Name:</label><br>
+				<input class="form-control" readonly="readonly" th:value="*{product.id}" th:field="*{product.name}" name="product.id">
+				<p th:errors="*{product.name}" />
+			</div>
+			<div class="mb-3 mt-3">
+				<label for="buyPrice"> Buy Price:</label><br>
+				<input class="form-control" readonly="readonly" th:field="*{buyPrice}" name="buyPrice">
+			</div>
+			
+			<div class="mb-3 mt-3">
+				<label for="quantity"> Quantity:</label><br>
+				<input type="text" class="form-control"  th:field="*{quantity}" name="quantity">
+			</div>
+			<div class="mb-3 mt-3">
+				<label for="bill.id"> Bill ID:</label><br>
+				<input type="email" readonly="readonly" th:value="*{bill.id}" name="bill.id">
+			</div>
+			
+			<button type="submit" th:text="#{button.save}"></button>
+	</form>
+
+</body>
+</html>

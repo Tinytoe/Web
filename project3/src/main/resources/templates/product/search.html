@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html layout:decorate="template.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body layout:fragment="body">
+	
+	<form th:action="@{/product/search}" method="post">
+		
+		<input name="name" th:value="${name}" placeholder="tim kiem theo danh muc..." />
+
+		<button type="submit" th:text="#{button.search}">Search</button><br>
+		<select name="size">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+		</select> 
+		<input name="page" th:value="${page}" placeholder="Trang" />
+		<button type="submit">Search</button>
+		<p>Tong so: <span th:text="${totalPage}"></span></p>
+	</form>
+	
+	<a th:href="@{/product/create}" > Create </a>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>NAME</th>
+				<th>Price</th>
+				<th>Description</th>
+				<th>Image</th>
+				<th>Category Name</th>
+				<th>Other</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product : ${productList}">
+				<td th:text="${product.id}"></td>
+				<td th:text="${product.name}"></td>
+				<td th:text="${product.price}"></td>
+				<td th:text="${product.description}"></td>
+				<td> <img style="width: 200px" alt="#{image.product}" th:src="@{'/product/download-file?image=' + ${product.image}}"></td>
+				<td th:text="${product.category.name}"></td>
+				<td>
+					<a class="btn btn-primary" th:href="@{'/product/edit?id=' + ${product.id}}">
+						<span class="glyphicon glyphicon-pencil"></span>
+						EDIT </a>
+						
+					<a class="btn btn-primary" th:href="@{'/product/delete?id=' + ${product.id}}">
+						<span class="glyphicon glyphicon-remove"></span>
+						DELETE </a> 
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

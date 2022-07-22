@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html layout:decorate="template.html">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body layout:fragment="body">
+	<div class="row">
+	<div class="container mt-3">
+		<h2>CREATE USER</h2>
+		<form th:action="@{/product/create}" method="post" enctype="multipart/form-data">
+			<div class="mb-3 mt-3">
+				<label>Name:</label> 
+				<input class="form-control" placeholder="Product name" name="name">
+			</div>
+			<div class="mb-3 mt-3">
+				<label>Price:</label> 
+				<input class="form-control" placeholder="Price" name="price">
+			</div>
+			
+			<div class="mb-3">
+				<label>Description:</label> 
+				<input  type="text" class="form-control" placeholder="Description" name="description">
+			</div>
+			<div>
+				<label> Image:</label>
+				<input type="file" name = "file">
+			</div>
+			<div>
+				<label> Select Category:</label><br> 
+				<select name="category.id">
+					<option value="">-----Select----</option>
+					    <option th:each="cate : ${categoryList}" th:value="${cate.id}" th:text="${cate.name}"></option>
+				</select><br>
+			</div>
+			<button type="submit" class="btn btn-primary" th:text="#{button.save}"></button>
+		</form>
+	</div>
+	</form>
+	
+</div>
+</body>
+</html>

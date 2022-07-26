@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
-import com.ducnt.projectAPI.entity.MessageDTO;
+import com.ducnt.projectAPI.model.MessageDTO;
 
 @Service
 public class MailService {
@@ -58,4 +58,25 @@ public class MailService {
 		javaMailSender.send(message);
 
 	}
+	
+	public void sendEmailPassword(MessageDTO messageDTO) throws MessagingException {
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
+
+		// load template email with content
+		Context context = new Context();
+		context.setVariable("toName", messageDTO.getToName());
+		context.setVariable("content", messageDTO.getContent());
+		String html = templateEngine.process("password-customer.html", context);
+
+		/// send mail
+		helper.setTo(messageDTO.getTo());
+		helper.setText(html, true);
+		helper.setSubject("THAY ĐỔI MẬT KHẨU THÀNH CÔNG");
+		helper.setFrom(messageDTO.getFrom());
+		javaMailSender.send(message);
+
+	}
+	
+	
 }

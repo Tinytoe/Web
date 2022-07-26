@@ -12,35 +12,15 @@
 <title>Insert title here</title>
 </head>
 <body layout:fragment="body">
-
-	<a th:href="@{/bill/create}"> Create </a>
-	<form th:action="@{/bill/thong-ke-theo-user}" method="post">
-		<div class="input-group">
-			<label>Thong ke so luong theo User Id: </label> <input
-				style="margin-left: 3px" type="text" name="x">
-			<button style="margin-left: 3px" type="submit">Search</button>
-		</div>
-	</form>
-
-	<form th:action="@{/bill/thongke}" method="post">
-		<div>
-			<label>Thong ke theo ngay: </label> <input type="date" name="from"
-				th:value="from"> <input type="date" name="to" th:value="to">
-			<button type="submit">Search</button>
-		</div>
-	</form>
-	<div>
-		<a th:href="@{/bill/thong-ke-theo-thang}"> XEM CHI TIET THONG KE
-			THEO THANG</a>
-	</div>
+	
+	<a th:href="@{/bill/create}" > Create </a>
+	
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>ID</th>
 				<th>Buy Date</th>
 				<th>User Id</th>
-				<th>Coupon Code</th>
-				<th>Discount</th>
 				<th>Other</th>
 			</tr>
 		</thead>
@@ -49,23 +29,23 @@
 				<td th:text="${bill.id}"></td>
 				<td th:text="${bill.buyDate}"></td>
 				<td th:text="${bill.user.id}"></td>
-				<td th:text="${bill.couponCode}"></td>
-				<td th:text="${bill.discount}"></td>
-				<td><a class="btn btn-primary"
-					th:href="@{'/bill/edit?id=' + ${bill.id}}"> <span
-						class="glyphicon glyphicon-pencil"></span> EDIT
-				</a> <a class="btn btn-primary"
-					th:href="@{'/bill/delete?id=' + ${bill.id}}"> <span
-						class="glyphicon glyphicon-remove"></span> DELETE
-				</a></td>
+				<td>
+				 
+					<a class="btn btn-primary" th:href="@{'/bill/edit?id=' + ${bill.id}}">
+						<span class="glyphicon glyphicon-pencil"></span>
+						EDIT </a>
+					<a class="btn btn-primary" th:href="@{'/bill/delete?id=' + ${bill.id}}">
+						<span class="glyphicon glyphicon-remove"></span>
+						DELETE </a>
+				</td>
 			</tr>
 		</tbody>
 	</table>
-
+	
 	<div>
-		<form th:action="@{/bill/search}" method="post">
-			<div>
+			<form th:action="@{/bill/search}" method="post">
 				<div>
+					<div>
 					<label>Items:</label>
 					<button class="button-number" type="submit" name="size"
 						th:value="5">5</button>
@@ -79,14 +59,14 @@
 					<button class="button-number" type="submit" name="page"
 						th:value="1">2</button>
 					<button class="button-number" type="submit" name="page"
-						th:value="2">3</button>
-					<p>
-						Tong so: <span th:text="${totalPage}"></span>
-					</p>
+						th:value="2">3</button>	
+					</div>
+					<div>
+					
 				</div>
-			</div>
-
-		</form>
-	</div>
+				</div>
+				
+			</form>
+		</div>
 </body>
 </html>

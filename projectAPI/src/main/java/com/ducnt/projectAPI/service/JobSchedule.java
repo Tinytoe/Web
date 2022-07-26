@@ -8,7 +8,7 @@
 //import org.springframework.scheduling.annotation.Scheduled;
 //import org.springframework.stereotype.Component;
 //
-//import com.ducnt.projectAPI.entity.MessageDTO;
+//import com.ducnt.projectAPI.model.MessageDTO;
 //import com.ducnt.projectAPI.repo.BillRepo;
 //
 //@Component

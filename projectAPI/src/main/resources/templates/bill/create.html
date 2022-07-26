@@ -17,8 +17,15 @@
 						<option value="">-----Select----</option>
 						    <option th:each="user : ${userList}" th:value="${user.id}" th:text="${user.username}"></option>
 					</select><br>
-					<button type="submit" th:text="#{button.save}"></button>
+					
 			</div>
+			<div>
+				<div class="mb-3">
+				<label>Coupon Code:</label> <br>
+				<input type="text" placeholder="Enter CouponCode" name="couponCodeInput">
+			</div>
+			</div>
+			<button type="submit" th:text="#{button.save}"></button>
 	</form>
 </body>
 </html>

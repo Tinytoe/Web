@@ -43,41 +43,9 @@ public class BillItemsController {
 	}
 
 	@PostMapping("/billitems/search")
-	public String search(Model model, @RequestParam(name = "size", required = false) String size,
-			@RequestParam(name = "page", required = false) String page,
-			@RequestParam(name = "name", required = false) String name) {
+	public String searchBillItems(Model model) {
 		
-//		int currentSize = 5;
-//		int currentPage = 0;
-//
-//		if (StringUtils.hasText(size)) {
-//			currentSize = Integer.parseInt(size);
-//		}
-//
-//		if (StringUtils.hasText(page)) {
-//			currentPage = Integer.parseInt(page);
-//		}
-//
-//		Pageable pageable = PageRequest.of(currentPage, currentSize);
 
-//		if (StringUtils.hasText(name)) {
-//			Page<BillItems> pageBillItems = billItemsRepo.searchByName("%" + name + "%", pageable);
-//			model.addAttribute("totalPage", pageUser.getTotalPages());
-//			model.addAttribute("userList", pageUser.getContent());
-//		}
-//		if (StringUtils.hasText(username)) {
-//			Page<User> pageUser = userRepo.searchByUserName("%" + username + "%", pageable);
-//			model.addAttribute("totalPage", pageUser.getTotalPages());
-//			model.addAttribute("userList", pageUser.getContent());
-//		} else {
-//
-//			Page<User> pageUser = userRepo.findAll(pageable);
-//
-//			model.addAttribute("totalPage", pageUser.getTotalPages());
-//			model.addAttribute("userList", pageUser.getContent());
-//		}
-
-		model.addAttribute("name", name);
 		return "billItems/search.html";
 	}
 

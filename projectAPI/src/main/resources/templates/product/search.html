@@ -47,7 +47,7 @@
 				<td th:text="${product.name}"></td>
 				<td th:text="${product.price}"></td>
 				<td th:text="${product.description}"></td>
-				<td> <img style="width: 200px" alt="#{image.product}" th:src="@{'/product/download-file?image=' + ${product.image}}"></td>
+				<td> <img style="width: 200px" alt="#{image.product}" th:src="@{'/product/download-file?image=' + ${product.urlImage}}"></td>
 				<td th:text="${product.category.name}"></td>
 				<td>
 					<a class="btn btn-primary" th:href="@{'/product/edit?id=' + ${product.id}}">

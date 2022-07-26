@@ -1,15 +1,12 @@
 package com.ducnt.projectAPI.entity;
 
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -17,22 +14,18 @@ import lombok.Data;
 @Entity
 @Table
 @Data
-public class Bill {
+public class Coupon {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private Date buyDate;
+	@Column(unique = true)
+	private	String couponCode;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	User user;
+	private int discountAmount;
 	
-	@OneToMany(mappedBy = "bill")
-	List<BillItems> billItems;
+	private Date expiredDate;
 	
-	private String couponCode;
 	
-	private int discount;
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html layout:decorate="template.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body layout:fragment="body">
+	
+	<a th:href="@{/bill/create}" > Create </a>
+	
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>User Id</th>
+				<th>SO_LUONG</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="thongKe : ${list}">
+				<td th:text="${thongKe.id}"></td>
+				<td th:text="${thongKe.sl}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div>
+			<form th:action="@{/bill/search}" method="post">
+				<div>
+					<div>
+					<label>Items:</label>
+					<button class="button-number" type="submit" name="size"
+						th:value="5">5</button>
+					<button class="button-number" type="submit" name="size"
+						th:value="10">10</button>
+					<button class="button-number" type="submit" name="size"
+						th:value="15">15</button>
+					<label>Page:</label>
+					<button class="button-number" type="submit" name="page"
+						th:value="0">1</button>
+					<button class="button-number" type="submit" name="page"
+						th:value="1">2</button>
+					<button class="button-number" type="submit" name="page"
+						th:value="2">3</button>	
+					</div>
+					<div>
+					
+				</div>
+				</div>
+				
+			</form>
+		</div>
+</body>
+</html>

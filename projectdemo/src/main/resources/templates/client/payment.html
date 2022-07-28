@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html layout:decorate="template.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body layout:fragment="body">
+	<div class="row">
+		<div>
+			<h2 style="margin-top: 10px">THÔNG TIN KHÁCH HÀNG</h2>
+			<div>
+				<p th:text=" 'Tên khách hàng: ' + ${user.name}" />
+				<label>Địa chỉ nhận hàng:</label> <input class="form-control"
+					style="width: 300px" type="text" name="address"><br> <label>Số
+					điện thoại nhận hàng:</label> <input class="form-control"
+					style="width: 300px" type="text" name="phone">
+			</div>
+		</div>
+		<div th:block>
+			<form action="/client/check-couponcode" method="post">
+				<div>
+					<div class="mb-3">
+						<label>Coupon Code:</label> <br> 
+						<input th:if="${coupon} == null" type="text"
+							placeholder="Enter CouponCode" name="couponCodeInput">
+						<input th:if="${coupon} != null" type="text"
+							th:value="${coupon.couponCode}">
+						<button type="submit" class="btn btn-primary">Check code</button>
+						<p th:if="${coupon} != null"
+							th:text="'Giảm: ' + ${coupon.discountAmount}"></p>
+
+					</div>
+				</div>
+			</form>
+		</div>
+		</th:block>
+		<div>
+			<h2>SẢN PHẨM</h2>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Buy Price</th>
+						<th>Quantity</th>
+						<th>Tạm Tính</th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:if="${order} != null">
+						<tr th:each="item : ${order.itemDTOs}">
+							<td th:text="${item.product.name}"></td>
+							<td th:text="${item.product.price}"></td>
+							<td th:text="${item.number}"></td>
+							<td th:text="${item.number* item.product.price}"></td>
+						</tr>
+					</th:block>
+				</tbody>
+				<tfoot>
+					<tr style="height: 40px">
+						<th style="border: none"></th>
+						<th style="border: none"></th>
+						<th></th>
+						<th></th>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+						<th>Coupon Code</th>
+						<th th:if="${coupon} != null"
+							th:text="'- ' + ${coupon.discountAmount}"></th>
+						<th th:if="${coupon} == null" th:text="null"></th>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+						<th>Thành tiền</th>
+						<th th:if="${coupon}!= null"
+							th:text="${sumTT} - ${coupon.discountAmount}"></th>
+						<th th:if="${coupon}== null" th:text="${sumTT}"></th>
+					</tr>
+				</tfoot>
+			</table>
+
+		</div>
+	</div>
+</body>
+</html>

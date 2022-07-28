@@ -1,0 +1,56 @@
+package com.ducnt.projectdemo.service;
+//package com.ducnt.projectAPI.service;
+//
+//import java.util.Date;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.stereotype.Service;
+//
+//import io.jsonwebtoken.Claims;
+//import io.jsonwebtoken.Jwts;
+//import io.jsonwebtoken.SignatureAlgorithm;
+//
+//@Service
+//public class JwtTokenProvider {
+//	
+//	@Autowired
+//	LoginService loginService;
+//	
+//	@Value("${jwt.secret}")
+//	private String secretKey;
+//	
+//	private long validityInMilliseconds = 360000;
+//	
+//	public String createToken(String username) {
+//		
+//		Claims claims = Jwts.claims().setSubject(username);
+//		Date now = new Date();
+//		Date validity = new Date(now.getTime() + validityInMilliseconds);
+//		String accessToken = Jwts.builder()//
+//				.setClaims(claims)//
+//				.setIssuedAt(now)//
+//				.setExpiration(validity)//
+//				.signWith(SignatureAlgorithm.HS256, secretKey)//
+//				.compact();
+//		return accessToken;
+//	}
+//	
+//	public boolean validateToken(String token) {
+//			Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+//			return true;
+//	}
+//	
+//	
+//	public Authentication getAuthentication(String token) {
+//		UserDetails userDetails = loginService.loadUserByUsername(getUsername(token));
+//		return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+//	}
+//
+//	public String getUsername(String token) {
+//		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+//	}
+//}

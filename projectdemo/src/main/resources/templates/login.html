@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>PLEASE LOGIN</h1>
+	<form th:action="@{/dang-nhap}" method="post">
+		<p th:if="${err} == 'error' " >Sai</p>
+		<input type="text" placeholder="username" name="username"> 
+		<input type="text" placeholder="password" name="password">
+		<button type="submit">Login</button>
+	</form>
+</body>
+</html>

@@ -122,7 +122,7 @@ public class CartController {
 			}
 		}
 
-		session.setAttribute("sumTT", sumTT);
+		session.setAttribute("sumTT", sumTT); 
 		return "redirect:/client/xem-gio-hang";
 	}
 

@@ -1,0 +1,53 @@
+<div th:fragment="menu-header">
+	<header>
+		<div class="row" style="background-color: black;">
+			<nav class="navbar navbar-expand-sm navbar-dark">
+				<div class="container-fluid">
+					<ul class="navbar-nav col-md-5">
+						<li style="margin-left: 100px;" class="nav-item"><a
+							class="nav-link" th:href="@{/profile1232}"> Kênh người bán </a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/profile}"> Trở thành người bán </a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/profile}"> <i class="fa-brands fa-facebook"></i>
+								<i class="fa-brands fa-instagram"></i> <i
+								class="fa-brands fa-tiktok"></i> Kết nối
+						</a></li>
+
+					</ul>
+					<ul class="navbar-nav col-md-7">
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/profile}"><i class="fa-solid fa-bell"></i> Thông
+								báo </a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/profile}"><i class="fa-solid fa-phone"></i> Hỗ
+								trợ </a></li>
+						<li th:if="${user} == null" class="nav-item"><a
+							class="nav-link" th:href="@{/dang-nhap}"> Đăng nhập </a></li>
+						<li th:if="${user} != null" class="nav-item"><a
+							class="nav-link" th:href="@{/home}" th:text="${user.name}"></a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/cart/xem-gio-hang}"> Xem giỏ hàng </a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/change-lang?lang=vi}"> <i
+								class="fa-solid fa-earth-asia"></i> VIE
+						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/change-lang?lang=en}"> <i
+								class="fa-solid fa-earth-europe"></i> EN
+						</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/logout}">
+								<i class="fa-solid fa-arrow-right-from-bracket"></i> logout
+						</a></li>
+					</ul>
+				</div>
+			</nav>
+			<div>
+				<a class="navbar-brand" th:href="@{/home}"> <img class="logo"
+					th:src="@{/images/logo.png}" alt="logo"
+					style="width: 250px; margin-left: 112px; margin-top: -43px">
+				</a>
+			</div>
+		</div>
+	</header>
+</div>

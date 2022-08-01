@@ -45,4 +45,7 @@ public class User {
 	@Column(name = "Role")
 	private List<String> roles;
 	
+	private String address;
+	
+	private String phone;
 }

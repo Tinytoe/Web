@@ -1,5 +1,7 @@
 package com.ducnt.projectdemo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,11 +39,12 @@ public class UserController {
 	}
 
 	@PostMapping("/user/create")
-	public String createUser(@ModelAttribute User user) {
+	public String createUser(@ModelAttribute User user, HttpSession session, Model model) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setPassword(encoder.encode(user.getPassword()));
 		userRepo.save(user);
-		return "redirect:/user/search";
+		model.addAttribute("success", session.getAttribute("success"));
+		return "redirect:/home";
 	}
 
 	@PostMapping("/user/search")

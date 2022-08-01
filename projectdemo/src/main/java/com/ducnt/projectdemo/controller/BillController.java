@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -22,15 +23,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ducnt.projectdemo.entity.Bill;
 import com.ducnt.projectdemo.entity.BillItems;
 import com.ducnt.projectdemo.entity.Coupon;
+import com.ducnt.projectdemo.entity.Order;
+import com.ducnt.projectdemo.entity.OrderItem;
 import com.ducnt.projectdemo.entity.Product;
 import com.ducnt.projectdemo.entity.User;
 import com.ducnt.projectdemo.model.MessageDTO;
 import com.ducnt.projectdemo.model.ThongKeDTO;
+import com.ducnt.projectdemo.repo.BillItemsRepo;
 import com.ducnt.projectdemo.repo.BillRepo;
 import com.ducnt.projectdemo.repo.CouponRepo;
 import com.ducnt.projectdemo.repo.ProductRepo;
@@ -45,10 +50,13 @@ public class BillController {
 
 	@Autowired
 	UserRepo userRepo;
-	
+
 	@Autowired
 	ProductRepo productRepo;
-	
+
+	@Autowired
+	BillItemsRepo billItemsRepo;
+
 	@Autowired
 	MailService mailService;
 
@@ -177,38 +185,47 @@ public class BillController {
 		billRepo.save(bill);
 		return "redirect:/bill/search";
 	}
-	
+
 	@PostMapping("/bill/create")
-	public String create(@ModelAttribute Bill bill, HttpSession session, 
-			@RequestParam(name = "userId") int userId,
-			@RequestParam(name = "couponCodeInput", required = false) String couponCodeInput) {
-
+	public String create(HttpSession session) {
+		Bill bill = new Bill();
 		bill.setBuyDate(new Date());
-		User user1 = userRepo.findById(bill.getUser().getId()).orElse(null);
-		if (StringUtils.hasText(couponCodeInput)) {
-			Coupon coupon = couponRepo.searchByCouponCode(couponCodeInput);
-			if (coupon.getExpiredDate().after(bill.getBuyDate())) {
-				bill.setCouponCode(couponCodeInput);
-				bill.setDiscount(coupon.getDiscountAmount());
-			} else {
-				bill.setCouponCode(couponCodeInput + " HET HAN");
-				bill.setDiscount(0);
-				System.out.println("COUPON HET HAN");
-			}
-
+		User user = (User) session.getAttribute("user");
+		Coupon coupon = (Coupon) session.getAttribute("coupon");
+		if (coupon != null) {
+			bill.setCouponCode(coupon.getCouponCode());
+			bill.setDiscount(coupon.getDiscountAmount());
+		} else {
+			bill.setCouponCode(null);
+			bill.setDiscount(0);
 		}
+
+		bill.setUser(user);
 
 		billRepo.save(bill);
+		System.out.println(bill.getId());
+
+		Order order = (Order) session.getAttribute("cart");
+		for (OrderItem orderItem : order.getItemDTOs()) {
+			BillItems billItems = new BillItems();
+			billItems.setBill(bill);
+			billItems.setProduct(orderItem.getProduct());
+			billItems.setQuantity(orderItem.getNumber());
+			billItems.setBuyPrice(orderItem.getProduct().getPrice());
+			billItemsRepo.save(billItems);
+		}
+		
+		
 
 		// send mail
-		MessageDTO messageDTO = new MessageDTO();
-		messageDTO.setToName(user1.getName());
-		messageDTO.setTo(user1.getEmail());
-		try {
-			mailService.sendEmail(messageDTO);
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		return "redirect:/bill/search";
+//		MessageDTO messageDTO = new MessageDTO();
+//		messageDTO.setToName(user.getName());
+//		messageDTO.setTo(user.getEmail());
+//		try {
+//			mailService.sendEmail(messageDTO);
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//		}
+		return "redirect:/client/payment-success";
 	}
 }

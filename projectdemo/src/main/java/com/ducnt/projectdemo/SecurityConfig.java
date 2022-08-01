@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// .hasAnyRole("ADMIN","SUBADMIN")//ROLE_
 				.hasAnyAuthority("ROLE_ADMIN")
 				.antMatchers("/bill/**").authenticated()
+				.antMatchers("/cart/payment").authenticated()
 				.antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 				.anyRequest().permitAll().and()
 				.csrf().disable()

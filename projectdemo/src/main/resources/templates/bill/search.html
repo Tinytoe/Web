@@ -13,8 +13,7 @@
 </head>
 <body layout:fragment="body">
 
-	<a th:href="@{/bill/create}"> Create </a>
-	<form th:action="@{/bill/thong-ke-theo-user}" method="post">
+	<form th:action="@{/admin/bill/thong-ke-theo-user}" method="post">
 		<div class="input-group">
 			<label>Thong ke so luong theo User Id: </label> <input
 				style="margin-left: 3px" type="text" name="x">
@@ -22,7 +21,7 @@
 		</div>
 	</form>
 
-	<form th:action="@{/bill/thongke}" method="post">
+	<form th:action="@{/admin/bill/thongke}" method="post">
 		<div>
 			<label>Thong ke theo ngay: </label> <input type="date" name="from"
 				th:value="from"> <input type="date" name="to" th:value="to">
@@ -30,7 +29,7 @@
 		</div>
 	</form>
 	<div>
-		<a th:href="@{/bill/thong-ke-theo-thang}"> XEM CHI TIET THONG KE
+		<a th:href="@{/admin/bill/thong-ke-theo-thang}"> XEM CHI TIET THONG KE
 			THEO THANG</a>
 	</div>
 	<table class="table table-bordered table-striped">
@@ -63,7 +62,7 @@
 	</table>
 
 	<div>
-		<form th:action="@{/bill/search}" method="post">
+		<form th:action="@{/admin/bill/search}" method="post">
 			<div>
 				<div>
 					<label>Items:</label>

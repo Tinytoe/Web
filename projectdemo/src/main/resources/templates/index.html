@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html layout:decorate="template.html">
+<head>
+<title>DANH SACH SAN PHAM</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+
+img {
+ padding: 10px;
+   display: block;
+  max-width:270px;
+  max-height:152px;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  height: auto;
+}
+
+.box {
+	width: 23%;
+	height: 100px;
+	border: 2px solid black;
+	margin: 12px;
+}
+
+.title {
+	font-size: 17px;
+	font-family: cursive;
+	font-weight: bold;
+}
+.titleCate{
+	font-size: 30px;
+	font-family: Trebuchet MS Helvetica;
+}
+
+.content {
+	font-size: 16px;
+	text-align: justify;
+	font-family: courier;
+}
+
+@-webkit-keyframes my {
+	 0% { color: #F8CD0A; } 
+	 50% { color: #fff;  } 
+	 100% { color: #F8CD0A;  } 
+ }
+ @-moz-keyframes my { 
+	 0% { color: #F8CD0A;  } 
+	 50% { color: #fff;  }
+	 100% { color: #F8CD0A;  } 
+ }
+ @-o-keyframes my { 
+	 0% { color: #F8CD0A; } 
+	 50% { color: #fff; } 
+	 100% { color: #F8CD0A;  } 
+ }
+ @keyframes my { 
+	 0% { color: #F8CD0A;  } 
+	 50% { color: #fff;  }
+	 100% { color: #F8CD0A;  } 
+ } 
+
+.test {
+	font-size: 24px;
+	font-weight: bold;
+	-webkit-animation: my 900ms infinite;
+	-moz-animation: my 900ms infinite;
+	-o-animation: my 900ms infinite;
+	animation: my 900ms infinite;
+}
+</style>
+</head>
+<body layout:fragment="body">
+
+	<div class="row">
+		<h2 class="test"
+			style="margin-top: 10px; margin-bottom: -3px; font-family: Trebuchet MS Helvetica; color: graytext;">
+			Đặc quyền cho bạn hôm nay!</h2>
+		<div class="box col-md-3">
+			<span class="title"> FakeShopee Giao hàng hoả tốc</span><br> <span
+				class="content"> Giờ đây bạn có thể nhận hàng nhanh trong
+				ngày mà không cần chờ đợi tại Hà Nội.</span>
+		</div>
+		<div class="box col-md-3">
+			<span class="title"> Sài Gòn Freeship </span><br> <span
+				class="content"> FakeShopee dành tặng Sài Gòn mã freeship 0đ
+				(số lượng có hạn)</span>
+		</div>
+		<div class="box col-md-3">
+			<span class="title"> Tặng 125.000đ</span><br> <span
+				class="content"> Áp dụng đặc biệt cho đơn hàng từ 2,5 triệu
+				đồng.</span>
+		</div>
+		<div class="box col-md-3">
+			<span class="title"> Khuyến mãi đến 10%</span><br> <span
+				class="content"> Mã giảm 10% cho hoá đơn mua hàng trên 5
+				triệu đồng</span>
+		</div>
+	</div>
+	<h1>DANH SÁCH SẢN PHẨM</h1>
+	<div th:each="category : ${categoryList}" class="row">
+		<h2 class="titleCate" th:text="${category.name}"></h2>
+		  <div th:each="product : ${category.products}" class="col-3 card">
+			<div class="card" style="width: 400px">
+				<img class="card-img-top"
+					th:src="@{'/product/download-file?image=' + ${product.urlImage}}"
+					alt="Card image">
+				<div class="card-body">
+					<h4 class="card-title" th:text="${product.name}"></h4>
+					<p class="card-text" th:text="${product.description}"></p>
+					<p class="card-text" th:text="${product.price} + '$'"> </p>
+				</div>
+			</div>
+			<form action="/cart/them-vao-gio-hang">
+					<div class="buttons_added" style="margin-left: 3px">
+						<input aria-label="quantity" class="input-qty" max="9999" min="1"
+							name="quantityInput" type="number" value="1"> <input
+							type="hidden" name="productId" th:value="${product.id}">
+						<button type="submit" class="btn btn-dark"
+							style="margin-left: 3px">Add to Cart</button>
+					</div>
+				</form>
+
+		</div>
+	</div>
+</body>
+
+</html>

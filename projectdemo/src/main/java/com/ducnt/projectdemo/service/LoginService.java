@@ -32,6 +32,8 @@ public class LoginService implements UserDetailsService {
 		for (String role : u.getRoles()) {
 			list.add(new SimpleGrantedAuthority(role));
 		}
+		
+		
 
 		// tao user cua security //user dang nhap hien tai
 		org.springframework.security.core.userdetails.User currentUser =

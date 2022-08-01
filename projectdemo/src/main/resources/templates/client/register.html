@@ -19,7 +19,7 @@
 <div class="row">
 	<div class="container mt-3">
 		<h2>CREATE USER</h2>
-		<form th:action="@{/user/create}" method="post">
+		<form th:action="@{/client/register}" method="post">
 			<div class="mb-3 mt-3">
 				<label for="name">Name:</label> 
 				<input class="form-control" placeholder="Enter Full name" name="name">
@@ -38,19 +38,22 @@
 				<label for="email">Email:</label> 
 				<input  type="email" class="form-control" placeholder="abcxyz@gmail.com" name="email">
 			</div>
-			
-			<div>
-				<label>Role:</label>
-				<input type="checkbox" name="roles" th:value="ROLE_ADMIN"> ADMIN
-				<input type="checkbox" name="roles" th:value="ROLE_MEMBER"> MEMBER
-				<input type="checkbox" name="roles" th:value="ROLE_SELLER"> SELLER
-				<input type="checkbox" name="roles" th:value="ROLE_CUSTOMER"> CUSTOMER
+			<div class="mb-3">
+				<label for="phone">Phone:</label> 
+				<input  type="text" class="form-control" placeholder="0123456789" name="phone">
+			</div>
+			<div class="mb-3">
+				<label for="address">Address:</label> 
+				<input  type="text" class="form-control" placeholder="Quang Trung - Hà Đông - Hà Nội" name="address">
 			</div>
 			
-			<button type="submit" class="btn btn-primary" th:text="#{button.save}"></button>
+			<div>
+				<input type="hidden" name="roles" th:value="ROLE_MEMBER">
+			</div>
+			
+			<button type="submit" class="btn btn-dark" >Register</button>
 		</form>
 	</div>
-	</form>
 	
 </div>
 </body>

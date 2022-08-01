@@ -2,6 +2,7 @@ package com.ducnt.projectdemo.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,7 +32,7 @@ public class CartController {
 
 	private double sumTT = 0;
 
-	@GetMapping("/bill/them-vao-gio-hang")
+	@GetMapping("/cart/them-vao-gio-hang")
 	public String addToCart(@RequestParam(name = "productId") int productId,
 			@RequestParam(name = "quantityInput") int quantityInput, Model model, HttpSession session) {
 
@@ -86,29 +88,10 @@ public class CartController {
 			model.addAttribute("order", order);
 		}
 		session.setAttribute("sumTT", sumTT);
-		return "redirect:/client/xem-gio-hang";
+		return "redirect:/cart/xem-gio-hang";
 	}
 
-	@GetMapping("/client/xem-gio-hang")
-	public String viewCart(HttpSession session, Model model) {
-		if (session.getAttribute("cart") != null) {
-			Order order = (Order) session.getAttribute("cart");
-			model.addAttribute("order", order);
-			model.addAttribute("sumTT", session.getAttribute("sumTT"));
-
-		} else
-			model.addAttribute("sumTT", null);
-		model.addAttribute("user", session.getAttribute("user"));
-		return "/client/gio-hang.html";
-	}
-
-	@PostMapping("/client/create-bill")
-	public String creatBill(HttpSession session, @RequestParam(name = "userId") int userId) {
-
-		return "/client/gio-hang.html";
-	}
-
-	@PostMapping("/client/update-cart")
+	@PostMapping("/cart/update-cart")
 	public String updatecart(@RequestParam(name = "prId") int id, @RequestParam(name = "count") int count,
 			HttpSession session) {
 
@@ -123,11 +106,32 @@ public class CartController {
 		}
 
 		session.setAttribute("sumTT", sumTT); 
-		return "redirect:/client/xem-gio-hang";
+		return "redirect:/cart/xem-gio-hang";
 	}
+	
+	@GetMapping("/cart/xem-gio-hang")
+	public String viewCart(HttpSession session, Model model) {
+		
+		if (session.getAttribute("cart") != null) {
+			Order order = (Order) session.getAttribute("cart");
+			model.addAttribute("order", order);
+			model.addAttribute("sumTT", session.getAttribute("sumTT"));
 
-	@PostMapping("/client/check-couponcode")
-	public String checkCouponCode(@RequestParam(name = "couponCodeInput") String couponCodeInput, HttpSession session) {
+		} else {
+			sumTT=0;
+			session.setAttribute("sumTT",sumTT);
+			model.addAttribute("sumTT", session.getAttribute("sumTT"));
+		} 
+		 if (session.getAttribute("user") == null) {
+				session.setAttribute("sumTT",sumTT);
+				model.addAttribute("sumTT", session.getAttribute("sumTT"));
+		 } else
+			
+		model.addAttribute("user", session.getAttribute("user"));
+		return "/cart/gio-hang.html";
+	}
+	@PostMapping("/cart/check-couponcode")
+	public String checkCouponCode(@RequestParam(name = "couponCodeInput", required = false) String couponCodeInput, HttpSession session) {
 
 		Coupon coupon = couponRepo.searchByCouponCode(couponCodeInput);
 		
@@ -137,7 +141,34 @@ public class CartController {
 			session.setAttribute("coupon", coupon);
 		}
 		
-		return "redirect:/client/payment";
+		return "redirect:/client/cart/payment";
 	}
+	
+	@GetMapping("/cart/xoa-khoi-gio-hang/{productId}")
+	public String removeFromCart(@PathVariable(name = "productId") int productId,
+								Model model, HttpSession session) {
+		
+		
+		Order order = (Order) session.getAttribute("cart");
+		List<OrderItem> orderItems = order.getItemDTOs();
+		
+		Iterator<OrderItem> iterator =  orderItems.iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next().getProduct().getId() == productId) {
+				iterator.remove();
+			}
+		}
+		if(orderItems.isEmpty()) {
+			session.removeAttribute("cart");
+		}
+		for (OrderItem item : orderItems) {
+			sumTT = item.getNumber() * item.getProduct().getPrice();
+		}
+		session.setAttribute("sumTT", sumTT); 
+		model.addAttribute("order", order);
+		
+		return "redirect:/cart/xem-gio-hang";
+	}
+	
 	
 }
